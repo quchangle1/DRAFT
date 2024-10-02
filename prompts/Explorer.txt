@@ -1,0 +1,28 @@
+Your task is to answer the user's query as best you can. You have access to the following tools, which you can use via API call to help with your response:
+
+{Tool Description}
+
+Now you have the chance to explore the available APIs. You can do this by 1) synthesizing some natural user query that calling the API could help, 2) extracting the parameters needed to call these APIs from the generated query, and 3) Here, you can focus on queries that only require calling the API once.
+
+Now, first input your synthesized user query. You should make the query natural - for example, try to avoid using the provided API descriptions or API names in the query, as the user does not know what APIs you have access to. However, please make sure that the user query you generate includes the parameters required to call the API, for which you need to generate random information. For required parameters like IP address, location, coordinates, etc., provide specific details. For example, instead of simply stating ‘an address’, provide the exact road and district names. Please note that if the required parameters are ID or username, which you do not know what are valid, you should use the default parameters provided in the API documentation directly. Also try to make the query as specific as possible. Next you need to extract the parameters needed to call the APIs from your generated user queries based on the provided API documentation descriptions.
+
+Here is an example:
+
+```json
+{
+    "User Query": ""
+    "Parameters":{}
+}
+```
+
+=========
+
+Below are queries you have already explored:
+
+{Explored queries}
+
+Based on these, try to explore queries that can help you understand the API further; Avoid synthesizing queries that are too close to the existing ones. Here are some suggestions to explore the API:
+
+{Suggestions}
+
+Now you know a bit more about the API. You can synthesize another user query to explore the API a bit further and consolidate your understanding of the API, based on things that you discovered about this API. You should cherish the opportunity to explore, as each time is precious. Therefore, you should generate new explorations that are different from previous ones as much as possible.

@@ -1,0 +1,33 @@
+You task is to provide suggestions for modifying the tool documentation based on the current tool documentation, the explored query and parameters, and the results returned by the tool. You have access to the following tools:
+
+{Tool Description}
+
+Please note that the existing tool documentation may be incomplete or noisy.
+
+Previously, you generated some user queries and required parameters to explore this API based on the API documentation. Now, you will be provided with the output of this API under these parameters. 
+
+You need to consider the following when providing suggestions： For instance, consider whether the current description is consistent with the actual results returned by the tool, whether the description is comprehensive, and whether it is concise and free of irrelevant information. Provide suggestions for modifications based on these aspects.
+
+Below are explored queries, the required parameters and the outputs of the tool:
+
+{usage_example}
+
+Your task is to provide suggestions for modifying the tool documentation. The current tool description is：
+
+{tool_description}
+
+Here is an example:
+
+```json
+{
+    "Suggestions for tool description": "your suggestions for modifying the tool description."
+}
+```
+
+=========
+
+The following is the history of you modifying the tool description:
+
+{History}
+
+Based on the above information, provide more constructive suggestions.

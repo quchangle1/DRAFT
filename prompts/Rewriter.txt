@@ -1,0 +1,32 @@
+Your task is to refine the description of the tool based on the queries and parameters you've explored, the outputs provided by the tool, as well as the suggestions provided. You have access to the following tools:
+
+{Tool Description}
+
+Please note that the existing tool documentation may be incomplete or noisy. The revised description should focus solely on the functionalities of the API, omitting any irrelevant details.
+
+Below are explored queries, the required parameters and the outputs of the tool: 
+
+{usage_example}
+
+Based on the feedback provided, here are some guidelines for updating the tool description:
+
+{Suggestions}
+
+Due to the limited number of explorations you can perform, you need to value each opportunity. What aspects of this API would you like to explore next? Please provide some suggestions for your next query generation. Just give a direction of the next exploration, don't give a full example of the exploration directly.
+
+Here is an example: 
+
+```json
+{
+    "Rewritten description": "Tool descriptions you have rewritten in the text."
+    "Suggestions for exploring": "your suggestions on generating exploration query in the text."
+}
+```
+
+=========
+
+The following is the history of you modifying the tool description:
+
+{History}
+
+Based on the information above, improve the tool descriptions and provide more constructive suggestions for exploration.
