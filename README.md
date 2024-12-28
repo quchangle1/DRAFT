@@ -1,5 +1,5 @@
 # DRAFT
-The implementation for ICLR 2025 Submission: From Exploration to Mastery: Enabling LLMs to Master Tools via Self-Driven Interactions.
+The implementation for the paper: From Exploration to Mastery: Enabling LLMs to Master Tools via Self-Driven Interactions.
 
 ## How to run the code
 1. Download ToolBench dataset from the [Google Drive](https://drive.google.com/drive/folders/1yBUQ732mPu-KclJnuQELEhtKakdXFc3J).
