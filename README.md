@@ -20,7 +20,8 @@ Repo for the paper "[From Exploration to Mastery:Enabling LLMs to Master Tools v
 
 ## 💡 Introduction
 
-Due to the inherent understanding gap between LLMs and humans, inefficiencies and inaccuracies within existing tool documentation hamper the effective utilization of tools by LLMs.
+Due to the inherent understanding gap between LLMs and humans, inefficiencies and inaccuracies within existing tool documentation hamper the effective utilization of tools by LLMs. Humans, acquire tool proficiency through repeated interactions and hands-on experiences, capable of maintaining an updated comprehension of these tools despite their evolving functionalities. In light of this, we propose DRAFT, conceptualized to automate the adjustment and optimization of tool documentation based on the feedback derived from the LLM's interaction with the tool.
+
 <p align="center">
     <img src="./images/introduction.png" width="1000">
 </p>
@@ -30,8 +31,6 @@ DRAFT is designed to dynamically adjust and optimize tool documentation based on
 <p align="center">
     <img src="./images/framework.png" width="1000">
 </p>
-
-> Humans, acquire tool proficiency through repeated interactions and hands-on experiences, capable of maintaining an updated comprehension of these tools despite their evolving functionalities. In light of this, we propose DRAFT, conceptualized to automate the adjustment and optimization of tool documentation based on the feedback derived from the LLM's interaction with the tool.
 
 ## 🛠️ Setup
 
