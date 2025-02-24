@@ -67,7 +67,7 @@ Run `Inference_DFSDT` to perform inference using the tool documentation modified
 You can specify the model, dataset, and method by cmd line arguments.
 ### Evaluation
 
-Run `Cal_path_rate.py` to calculate the path rate for evaluating the results.
+Run `Cal_path_rate` to calculate the path rate for evaluating the results.
 
 > python Cal_path_rate.py
 
