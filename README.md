@@ -60,9 +60,9 @@ Run `DRAFT` to get revised tool documentation:
 
 ### Inference
 
-Run `ToolBench_DFSDT` to perform inference using the tool documentation modified by DRAFT to examine the effectiveness of DRAFT.
+Run `Inference_DFSDT` to perform inference using the tool documentation modified by DRAFT to examine the effectiveness of DRAFT.
 
-> python ToolBench\_DFSDT -model\_name gpt-4o-2024-08-06 -data\_type G3 -method DRAFT
+> python Inference\_DFSDT -model\_name gpt-4o-2024-08-06 -data\_type G3 -method DRAFT
 
 You can specify the model, dataset, and method by cmd line arguments.
 ### Evaluation
