@@ -768,8 +768,7 @@ if __name__ == '__main__':
     base_path = args.tool_root_dir
     index = build_index(base_path)
     dataset = read_json(f'''dataset/ToolBench/tool_instruction/{args.method}.json''')
-    if args.data_type == 'G3':
-        test_data = read_json(f'''dataset/ToolBench/test_data/{args.data_type}_instruction.json''')
+    test_data = read_json(f'''dataset/ToolBench/test_data/{args.data_type}.json''')
     progress_file = f'''Toolbnech_dfs_{args.data_type}_{args.model_name}_{args.method}.txt'''
 
     start_index = get_last_processed_index(progress_file)
