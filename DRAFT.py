@@ -267,7 +267,7 @@ with open('prompts/Rewriter.txt', 'r') as file:
     rewrite_prompt_template = file.read()
     rewrite_prompt, rewrite_prompt_follow = rewrite_prompt_template.split('=========')
 
-with open('toolbench.json', 'r', encoding='utf-8') as file:
+with open('dataset/ToolBench/tool_instruction/toolbench.json', 'r', encoding='utf-8') as file:
     tools = json.load(file)
 
 temperature = 0.2
@@ -378,7 +378,7 @@ for tool in tools:
                 break  
 
     tool['description'] = rewrite_description_history[-1]
-    with open("update_tools.json", 'a', encoding='utf-8') as output_data_file:
+    with open("DRAFT.json", 'a', encoding='utf-8') as output_data_file:
         json.dump(tool, output_data_file, ensure_ascii=False, indent=4)
         output_data_file.write(',')
         output_data_file.write('\n')
