@@ -14,7 +14,7 @@ Repo for the paper "[From Exploration to Mastery:Enabling LLMs to Master Tools v
 ## 🔥 News
 
 - [2025/2/24] We release all the code for DRAFT.
-- [2025/2/11] DRAFT is selected to be presented as an Oral (1.8%).
+- [2025/2/11] DRAFT is selected to be presented as an **Oral (1.8%)**.
 - [2025/1/23]  DRAFT is accepted by [**ICLR 2025**](https://iclr.cc/).
 - [2024/10/10] Our [**paper**](https://arxiv.org/abs/2410.08197) and code is released.
 
