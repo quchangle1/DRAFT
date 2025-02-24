@@ -267,7 +267,7 @@ with open('prompts/Rewriter.txt', 'r') as file:
     rewrite_prompt_template = file.read()
     rewrite_prompt, rewrite_prompt_follow = rewrite_prompt_template.split('=========')
 
-with open('dataset/ToolBench/tool_instruction/toolbench.json', 'r', encoding='utf-8') as file:
+with open('dataset/ToolBench/tool_instruction/Initial.json', 'r', encoding='utf-8') as file:
     tools = json.load(file)
 
 temperature = 0.2
