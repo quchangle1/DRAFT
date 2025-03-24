@@ -276,108 +276,121 @@ max_tokens = 2000
 model = "gpt-4o-2024-08-06"
 episodes=5
 
-for tool in tools:
+for tool in tools.values():
     tool_save =tool
     tool_category=tool['category']
     tool_name=tool['tool_name']
-    api_name=tool['api_name']
-    last_tool_description=tool['description']
-    required_parameters=tool['required_parameters']
-    optional_parameters=tool['optional_parameters']
-    explored_queries=[]
-    explored_queries_embeddings=[]
-    explored_examples=[]
-    suggestions=[]
-    rewrite_description_history=[]
-    rewrite_description_history.append(last_tool_description)
-    rewrite_agent_history=[]
-    suggestion_from_rewrite_agent=''
-    for episode in range(episodes):
-        tool_info = {'category': tool_category, 'name': api_name, 'description': rewrite_description_history[-1], 'required_parameters': required_parameters, 'optional_parameters': optional_parameters}
-        tool_description = str(tool_info)
-        explore_prompt = example_prompt.replace('{Tool Description}', tool_description)
-        if len(explored_queries) > 0:
-            explore_prompt_follow = example_prompt_follow.replace('{Explored queries}', str(explored_queries))
-            explore_prompt_follow = explore_prompt_follow.replace('{Suggestions}', suggestion_from_rewrite_agent)
-            explore_prompt = explore_prompt + explore_prompt_follow
-            for t in range(3):
+    for name, api_info in tool["tool_guidelines"].items():
+        api_name=api_info['name']
+        last_tool_description=api_info['description']
+        required_parameters=api_info['required_parameters']
+        optional_parameters=api_info['optional_parameters']
+        explored_queries=[]
+        explored_queries_embeddings=[]
+        explored_examples=[]
+        suggestions=[]
+        rewrite_description_history=[]
+        rewrite_description_history.append(last_tool_description)
+        rewrite_agent_history=[]
+        suggestion_from_rewrite_agent=''
+        for episode in range(episodes):
+            tool_info = {'category': tool_category, 'name': api_name, 'description': rewrite_description_history[-1], 'required_parameters': required_parameters, 'optional_parameters': optional_parameters}
+            tool_description = str(tool_info)
+            explore_prompt = example_prompt.replace('{Tool Description}', tool_description)
+            if len(explored_queries) > 0:
+                explore_prompt_follow = example_prompt_follow.replace('{Explored queries}', str(explored_queries))
+                explore_prompt_follow = explore_prompt_follow.replace('{Suggestions}', suggestion_from_rewrite_agent)
+                explore_prompt = explore_prompt + explore_prompt_follow
+                for t in range(3):
+                    messages = [
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": explore_prompt}
+                    ]
+                    example_ans = openai_response(messages, temperature, top_p, max_tokens, model)
+                    cur_embedding = openai_embedding(example_ans['User Query'])
+                    similarity = [cosine_similarity(emb, cur_embedding) for emb in explored_queries_embeddings]
+                    if all(sim < 0.9 for sim in similarity): 
+                        break
+                    else:
+                        explore_prompt += f"\nYour last generate query '{example_ans['User Query']}' is too similar to the previous ones. Please generate a different query."
+            else :
                 messages = [
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": explore_prompt}
                 ]
                 example_ans = openai_response(messages, temperature, top_p, max_tokens, model)
-                cur_embedding = openai_embedding(example_ans['User Query'])
-                similarity = [cosine_similarity(emb, cur_embedding) for emb in explored_queries_embeddings]
-                if all(sim < 0.9 for sim in similarity): 
-                    break
-                else:
-                    explore_prompt += f"\nYour last generate query '{example_ans['User Query']}' is too similar to the previous ones. Please generate a different query."
-        else :
+            explored_queries.append(example_ans['User Query'])
+            explored_queries_embeddings.append(openai_embedding(example_ans['User Query']))
+            
+            cate = tool_category
+            tool_name = change_name(standardize(tool_name))
+            api_name = change_name(standardize(api_name))
+            parameters = example_ans['Parameters']
+            payload = {
+                "category": cate,
+                "tool_name": tool_name,
+                "api_name": api_name,
+                "tool_input": parameters,
+                "strip": "filter",
+                "rapidapi_key": rapidapi_key,
+            }
+
+            response = get_rapidapi_response(payload)
+            example_ans['API_Response'] = response
+            explored_examples.append(example_ans)
+
+            suggestion_prompt_temp = suggestion_prompt.replace('{Tool Description}', tool_description)
+            suggestion_prompt_temp = suggestion_prompt_temp.replace('{usage_example}', str(example_ans))
+            if len(rewrite_description_history) > 1:
+                suggestion_prompt_follow_temp = suggestion_prompt_follow.replace('{History}', str(rewrite_description_history))
+                suggestion_prompt_temp += suggestion_prompt_follow_temp
             messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": explore_prompt}
-            ]
-            example_ans = openai_response(messages, temperature, top_p, max_tokens, model)
-        explored_queries.append(example_ans['User Query'])
-        explored_queries_embeddings.append(openai_embedding(example_ans['User Query']))
-        
-        cate = tool_category
-        tool_name = change_name(standardize(tool_name))
-        api_name = change_name(standardize(api_name))
-        parameters = example_ans['Parameters']
-        payload = {
-            "category": cate,
-            "tool_name": tool_name,
-            "api_name": api_name,
-            "tool_input": parameters,
-            "strip": "filter",
-            "rapidapi_key": rapidapi_key,
-        }
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": suggestion_prompt_temp}
+                    ]
+            suggestion_ans = openai_response(messages, temperature, top_p, max_tokens, model)
+            suggestions.append(suggestion_ans)
+            
 
-        response = get_rapidapi_response(payload)
-        example_ans['API_Response'] = response
-        explored_examples.append(example_ans)
+            rewrite_prompt_temp = rewrite_prompt.replace('{Tool Description}', tool_description)
+            rewrite_prompt_temp = rewrite_prompt_temp.replace('{usage_example}', str(example_ans))
+            rewrite_prompt_temp = rewrite_prompt_temp.replace('{Suggestions}', suggestion_ans['Suggestions for tool description'])
+            rewrite_prompt_temp = rewrite_prompt_temp.replace('{tool_description}', tool_info['description'])
+            if len(rewrite_description_history) > 1:
+                rewrite_prompt_follow_temp = rewrite_prompt_follow.replace('{History}', str(rewrite_description_history))
+                rewrite_prompt_temp += rewrite_prompt_follow_temp
+            messages = [
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": rewrite_prompt_temp}
+                    ]
+            rewrtite_ans = openai_response(messages, temperature, top_p, max_tokens, model)
+            rewrite_description_history.append(rewrtite_ans['Rewritten description'])
+            last_tool_description = rewrtite_ans['Rewritten description']
+            suggestion_from_rewrite_agent=str(rewrtite_ans['Suggestions for exploring'])
+            rewrite_tool={}
+            rewrite_tool['tool_description'] = rewrtite_ans
+            rewrite_agent_history.append(rewrite_tool)
 
-        suggestion_prompt_temp = suggestion_prompt.replace('{Tool Description}', tool_description)
-        suggestion_prompt_temp = suggestion_prompt_temp.replace('{usage_example}', str(example_ans))
-        if len(rewrite_description_history) > 1:
-            suggestion_prompt_follow_temp = suggestion_prompt_follow.replace('{History}', str(rewrite_description_history))
-            suggestion_prompt_temp += suggestion_prompt_follow_temp
-        messages = [
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": suggestion_prompt_temp}
-                ]
-        suggestion_ans = openai_response(messages, temperature, top_p, max_tokens, model)
-        suggestions.append(suggestion_ans)
-        
+            if len(rewrite_description_history) > 1:
+                reference_sentence = rewrite_description_history[-2]
+                candidate_sentence = rewrite_description_history[-1]
+                delta = compute_similarity_and_bleu(reference_sentence, candidate_sentence)
+                if delta < 0.75:
+                    break  
 
-        rewrite_prompt_temp = rewrite_prompt.replace('{Tool Description}', tool_description)
-        rewrite_prompt_temp = rewrite_prompt_temp.replace('{usage_example}', str(example_ans))
-        rewrite_prompt_temp = rewrite_prompt_temp.replace('{Suggestions}', suggestion_ans['Suggestions for tool description'])
-        rewrite_prompt_temp = rewrite_prompt_temp.replace('{tool_description}', tool_info['description'])
-        if len(rewrite_description_history) > 1:
-            rewrite_prompt_follow_temp = rewrite_prompt_follow.replace('{History}', str(rewrite_description_history))
-            rewrite_prompt_temp += rewrite_prompt_follow_temp
-        messages = [
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": rewrite_prompt_temp}
-                ]
-        rewrtite_ans = openai_response(messages, temperature, top_p, max_tokens, model)
-        rewrite_description_history.append(rewrtite_ans['Rewritten description'])
-        last_tool_description = rewrtite_ans['Rewritten description']
-        suggestion_from_rewrite_agent=str(rewrtite_ans['Suggestions for exploring'])
-        rewrite_tool={}
-        rewrite_tool['tool_description'] = rewrtite_ans
-        rewrite_agent_history.append(rewrite_tool)
+        api_info['description'] = rewrite_description_history[-1]
+    
+    tool_doc = str(tool)
 
-        if len(rewrite_description_history) > 1:
-            reference_sentence = rewrite_description_history[-2]
-            candidate_sentence = rewrite_description_history[-1]
-            delta = compute_similarity_and_bleu(reference_sentence, candidate_sentence)
-            if delta < 0.75:
-                break  
+    with open('prompts/rewrite_tool_doc.txt', 'r') as file:
+        prompt_template = file.read()
+    rewrite_tool_prompt = prompt_template.replace('{Tool Description}', tool_doc)
+    messages = [
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": rewrite_tool_prompt}
+                    ]
+    tool['tool_description'] = openai_response(messages, temperature, top_p, max_tokens, model)['tool_description']
 
-    tool['description'] = rewrite_description_history[-1]
     with open("DRAFT.json", 'a', encoding='utf-8') as output_data_file:
         json.dump(tool, output_data_file, ensure_ascii=False, indent=4)
         output_data_file.write(',')
