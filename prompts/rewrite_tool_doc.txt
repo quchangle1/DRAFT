@@ -1,0 +1,17 @@
+Your task is to create a concise and effective tool usage description based on the tool documentation. You should ensure the description only contains the purposes of the tool without irrelevant information. Here is an example:
+{Tool Documentation} 
+Tool usage description: 
+{Tool_name} is a tool that can {General_Purposes}. 
+This tool has {Number of Functions} multiple built-in functions: 
+1. {Function_1} is to {Functionality_of_Function_1} 
+2. {Function_2} is to ...
+
+You've previously explored the api under this tool and refined the api_description based on the results returned by the api, and you need to integrate this information to give a better tool_description. Let's begin!
+{Tool Description} 
+Be sure to use the following formatted Markdown code snippet, and please return a parsable JSON. Just output the JSON. 
+
+```json
+{
+    "tool_description": str
+}
+```
