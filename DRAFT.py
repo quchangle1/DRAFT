@@ -375,7 +375,7 @@ for tool in tools.values():
                 reference_sentence = rewrite_description_history[-2]
                 candidate_sentence = rewrite_description_history[-1]
                 delta = compute_similarity_and_bleu(reference_sentence, candidate_sentence)
-                if delta < 0.75:
+                if delta > 0.75:
                     break  
 
         api_info['description'] = rewrite_description_history[-1]
