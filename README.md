@@ -52,7 +52,7 @@ Get OpenAI key from [OpenAI](https://platform.openai.com/playground/chat), Rapid
 
 ### Data Setup
 
-You can download ToolBench dataset from the [Google Drive](https://drive.google.com/drive/folders/1yBUQ732mPu-KclJnuQELEhtKakdXFc3J) and RestBench dataset from [RestBench](https://github.com/Yifan-Song793/RestGPT) repo, then extract all tool documentation. Alternatively, you can directly use our preprocessed tool documentation.
+You can download ToolBench dataset from the [Google Drive](https://drive.google.com/file/d/1M06p-OO1YM80MNhIbLYw2FtRB5Qmh39z/view) or [Tsinghua cloud](https://cloud.tsinghua.edu.cn/f/c9e50625743b40bfbe10/) and RestBench dataset from [RestBench](https://github.com/Yifan-Song793/RestGPT) repo, then extract all tool documentation. Alternatively, you can directly use our preprocessed tool documentation.
 
 ## 🚀 Quick Start
 
