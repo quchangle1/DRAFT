@@ -1,0 +1,1605 @@
+{
+    "0": {
+        "ID": 0,
+        "tool_name": "GET_albums_id",
+        "description": "This API retrieves detailed information about a specific album from the Spotify catalog using the album's Spotify ID. It provides essential details such as album type, artists, available markets, release date, total tracks, and track details. An optional 'market' parameter allows filtering by country code to tailor content availability. The response includes key fields like 'artists', 'tracks', and 'images' for a comprehensive album overview.",
+        "url": "http://api.spotify.com/v1/albums/{id}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the album.\n",
+                    "example": "4aawyAB9vmqN3uQ7FjRGTy",
+                    "title": "Spotify Album ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you give me information about the album with Spotify ID 4aawyAB9vmqN3uQ7FjRGTy, focusing on its release date and the number of tracks it has?",
+            "url": "http://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy",
+            "Parameters": {}
+        }
+    },
+    "1": {
+        "ID": 1,
+        "tool_name": "GET_albums_id_tracks",
+        "description": "This API retrieves detailed information about tracks from a specified Spotify album, including artist details, track metadata, and availability in different markets. You can filter tracks by market using an ISO 3166-1 alpha-2 country code, limit the number of tracks returned (default is 20, maximum is 50), and use an offset to skip a specified number of tracks. Each track includes information such as artist names, duration, explicit content flag, and preview URL.",
+        "url": "http://api.spotify.com/v1/albums/{id}/tracks",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the album.\n",
+                    "example": "4aawyAB9vmqN3uQ7FjRGTy",
+                    "title": "Spotify Album ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "I am interested in finding out which tracks are available in the Canadian market from the album with Spotify ID 4aawyAB9vmqN3uQ7FjRGTy, and I only want to see the first 5 tracks.",
+            "url": "http://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks",
+            "Parameters": {
+                "market": "CA",
+                "limit": 5
+            }
+        }
+    },
+    "2": {
+        "ID": 2,
+        "tool_name": "GET_artists_id",
+        "description": "Retrieve detailed information about an artist from the Spotify catalog using their unique Spotify ID. The response includes the artist's name, genres, popularity score, follower count, images, and external URLs. This tool is useful for understanding an artist's musical style, popularity, and public appeal. Example: Use the Spotify Artist ID to get information about Pitbull, including his follower count and popularity score.",
+        "url": "http://api.spotify.com/v1/artists/{id}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the artist.\n",
+                    "example": "0TnOYISbd1XYRBk9myaseg",
+                    "title": "Spotify Artist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I heard about an artist with Spotify ID 0TnOYISbd1XYRBk9myaseg who has been gaining a lot of followers recently. Can you provide details on their current follower count and how popular they are?",
+            "url": "http://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg",
+            "Parameters": {}
+        }
+    },
+    "3": {
+        "ID": 3,
+        "tool_name": "GET_artists_id_albums",
+        "description": "This API retrieves a list of albums associated with a specific artist, identified by their Spotify ID. The response includes an 'items' array with details such as album name, release date, total tracks, album type, album group, and available markets. It also provides pagination information like 'limit', 'offset', 'total', 'next', and 'previous'. Optional query parameters allow filtering by album type (album, single, appears_on, compilation) using the 'include_groups' parameter, market, limit, and offset. If 'include_groups' is not specified, all types of albums will be returned by default. The 'market' parameter is crucial for filtering albums available in specific regions, ensuring users can access region-specific content.",
+        "url": "http://api.spotify.com/v1/artists/{id}/albums",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the artist.\n",
+                    "example": "0TnOYISbd1XYRBk9myaseg",
+                    "title": "Spotify Artist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "include_groups",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. <br/>\nValid values are:<br/>- `album`<br/>- `single`<br/>- `appears_on`<br/>- `compilation`<br/>For example: `include_groups=album,single`.\n",
+                    "example": "single,appears_on",
+                    "title": "Groups to include (single, album, appears_on, compilation)",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "What are the first 10 singles released by the artist with Spotify ID 0TnOYISbd1XYRBk9myaseg, available in the Canadian market?",
+            "url": "http://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/albums",
+            "Parameters": {
+                "include_groups": "single",
+                "market": "CA",
+                "limit": 10
+            }
+        }
+    },
+    "4": {
+        "ID": 4,
+        "tool_name": "GET_artists_id_related-artists",
+        "description": "The tool provides a list of artists similar to a specified artist from the Spotify catalog, based on Spotify's analysis of user listening patterns. The response includes detailed information about each related artist, such as their Spotify URL, follower count, genres, popularity score, and available images. While this tool can help explore artists with similar fan bases or listening patterns, users should be aware that the similarity may not always align with musical genres, as the tool may return artists from different genres than expected.",
+        "url": "http://api.spotify.com/v1/artists/{id}/related-artists",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the artist.\n",
+                    "example": "0TnOYISbd1XYRBk9myaseg",
+                    "title": "Spotify Artist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I'm interested in discovering artists similar to a jazz musician. Can you find some artists related to Miles Davis?",
+            "url": "http://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/related-artists",
+            "Parameters": {}
+        }
+    },
+    "5": {
+        "ID": 5,
+        "tool_name": "GET_artists_id_top-tracks",
+        "description": "This API retrieves the top tracks of a specified artist from the Spotify catalog. It allows filtering by a specific country using the 'market' parameter, ensuring that only tracks available in that market are returned. The response provides detailed information about each track, including album details, artist collaborations, track duration, explicit content flag, popularity, and preview URLs. Additionally, it includes external URLs for accessing the artist, album, and track on Spotify. If neither the market nor user country is specified, the content may be considered unavailable. This API is useful for obtaining localized music preferences and availability.",
+        "url": "http://api.spotify.com/v1/artists/{id}/top-tracks",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the artist.\n",
+                    "example": "0TnOYISbd1XYRBk9myaseg",
+                    "title": "Spotify Artist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "What are the most popular tracks of the artist with Spotify ID 6eUKZXaKkcviH0Ku9w2n3V available in Canada?",
+            "url": "http://api.spotify.com/v1/artists/6eUKZXaKkcviH0Ku9w2n3V/top-tracks",
+            "Parameters": {
+                "market": "CA"
+            }
+        }
+    },
+    "6": {
+        "ID": 6,
+        "tool_name": "GET_browse_new-releases",
+        "description": "The API provides a list of the latest album releases on Spotify, which can be filtered by a single country using ISO 3166-1 alpha-2 codes and paginated using 'limit' and 'offset' parameters. The 'country' parameter allows users to specify a particular country to make the results relevant to that region. The 'limit' parameter controls the number of results returned, with a default of 20 and a maximum of 50. The 'offset' parameter is used for pagination, indicating the starting index for the results. The API response includes detailed album information such as album type (e.g., single, album, EP), artist information, available markets, external Spotify URLs, release date with precision, total tracks, and album images. This functionality is useful for displaying new music releases relevant to specific regions or for general browsing. Note that the API does not support filtering by multiple countries simultaneously; the 'country' parameter can only accept a single ISO code at a time.",
+        "url": "http://api.spotify.com/v1/browse/new-releases",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "country",
+                "required": "false",
+                "schema": {
+                    "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries.\n",
+                    "example": "SE",
+                    "title": "Country",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Could you provide me with the latest album releases on Spotify that are available in both the US and UK markets?",
+            "url": "http://api.spotify.com/v1/browse/new-releases",
+            "Parameters": {
+                "country": "US",
+                "limit": 20,
+                "offset": 0
+            }
+        }
+    },
+    "7": {
+        "ID": 7,
+        "tool_name": "GET_me",
+        "description": "The 'GET_me' API retrieves detailed profile information about the current Spotify user. It requires valid authentication credentials or tokens to access user data. If the user is authorized, the response may include details such as the user's username, email, subscription type, country of registration, and other profile information. If the user is not authorized, the API will return an 'Unauthorized' error with a status code of 401. While the API does not explicitly provide information on specific subscription plans like family or student plans, such details might be inferred from the subscription type if available.",
+        "url": "http://api.spotify.com/v1/me",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "Could you provide information on whether my Spotify account is linked to any family or student plans?",
+            "url": "http://api.spotify.com/v1/me",
+            "Parameters": {}
+        }
+    },
+    "8": {
+        "ID": 8,
+        "tool_name": "DELETE_me_albums",
+        "description": "This API endpoint allows Spotify Premium users to remove one or more albums from their 'Your Music' library. A valid Spotify Premium account is required, as indicated by a 'PREMIUM_REQUIRED' error if the account does not meet this requirement. Users must provide a comma-separated list of valid Spotify Album IDs, with a maximum of 20 IDs per request. If the same album ID is provided multiple times, it will not cause an error, but the operation will still require a Premium account to succeed. Invalid or incorrect IDs will result in an error.",
+        "url": "http://api.spotify.com/v1/me/albums",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids) for the albums. Maximum: 20 IDs.\n",
+                    "example": "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
+                    "title": "Spotify Album IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I accidentally added the same album twice to my Spotify library. Can you remove the album with ID 1A2GTWGtFfWp7KSQTwWOyo twice to see what happens?",
+            "url": "http://api.spotify.com/v1/me/albums",
+            "Parameters": {
+                "ids": "1A2GTWGtFfWp7KSQTwWOyo,1A2GTWGtFfWp7KSQTwWOyo"
+            }
+        }
+    },
+    "9": {
+        "ID": 9,
+        "tool_name": "GET_me_albums",
+        "description": "This API retrieves a list of albums saved in the current Spotify user's 'Your Music' library. It requires proper authentication and authorization. A '403 Forbidden' error may occur if the user lacks necessary permissions or if there are account-related issues. Optional parameters include 'limit' to specify the number of albums to return (default is 20, maximum is 50), 'offset' to determine the starting point of the albums (default is 0), and 'market' to filter albums by availability in a specified country using an ISO 3166-1 alpha-2 country code. If a valid access token is provided, the user's account country takes precedence over the 'market' parameter. Ensure the user is authenticated and has granted necessary permissions to access their saved albums. Provide clear error messages and guidance on resolving permission issues if a '403 Forbidden' error occurs.",
+        "url": "http://api.spotify.com/v1/me/albums",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you show me the albums saved in my Spotify library that are available in the French market, starting from the 20th album, and show me up to 25 albums?",
+            "url": "http://api.spotify.com/v1/me/albums",
+            "Parameters": {
+                "limit": 25,
+                "offset": 20,
+                "market": "FR"
+            }
+        }
+    },
+    "10": {
+        "ID": 10,
+        "tool_name": "PUT_me_albums",
+        "description": "This API allows users to save one or more albums to their 'Your Music' library on Spotify by providing a comma-separated list of valid Spotify Album IDs. The maximum number of IDs that can be processed in a single request is 20. A Spotify Premium account is required to use this endpoint, and attempting to use it without a Premium account will result in a '403 Forbidden' error with the reason 'PREMIUM_REQUIRED'. If any of the provided album IDs are invalid, the request may fail. Ensure that all album IDs are valid Spotify IDs to avoid errors.",
+        "url": "http://api.spotify.com/v1/me/albums",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids) for the albums. Maximum: 20 IDs.\n",
+                    "example": "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
+                    "title": "Spotify Album IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I just got a Spotify Premium account and want to test saving albums to my library. Can you add these albums with IDs: 1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc,3KuXEGcqLcnEYWnn3OEGy0,4aawyAB9vmqN3uQ7FjRGTy,5ht7ItJgpBH7W6vJ5BqpPr,6kZ42qRrzov54LcAk4onW9,7gsWAHLeT0w7es6FofOXk1,8hP6c0t0Qz4ZxD5m5rQ6t1,9f5yY3tZ2z9kL5j5p5rQ6t,0sNOF9WDwhWunNAHPD3Baj?",
+            "url": "http://api.spotify.com/v1/me/albums",
+            "Parameters": {
+                "ids": "1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc,3KuXEGcqLcnEYWnn3OEGy0,4aawyAB9vmqN3uQ7FjRGTy,5ht7ItJgpBH7W6vJ5BqpPr,6kZ42qRrzov54LcAk4onW9,7gsWAHLeT0w7es6FofOXk1,8hP6c0t0Qz4ZxD5m5rQ6t1,9f5yY3tZ2z9kL5j5p5rQ6t,0sNOF9WDwhWunNAHPD3Baj"
+            }
+        }
+    },
+    "11": {
+        "ID": 11,
+        "tool_name": "DELETE_me_following",
+        "description": "This API allows Spotify Premium users to unfollow one or more artists or other Spotify users. Users must specify the type of entity to unfollow ('artist' or 'user') and provide a comma-separated list of Spotify IDs for these entities. The API can process a maximum of 50 IDs in a single request. Note that a 'PREMIUM_REQUIRED' error will occur if the user does not have a Spotify Premium account. Example request format: `type=user&ids=1vCWHaC5f2uS3yhpwWbIA6,3TVXtAsR1Inumwj472S9r4`.",
+        "url": "http://api.spotify.com/v1/me/following",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "type",
+                "required": "true",
+                "schema": {
+                    "description": "The ID type: either `artist` or `user`.\n",
+                    "enum": [
+                        "artist",
+                        "user"
+                    ],
+                    "example": "artist",
+                    "title": "Item Type",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids). For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request.\n",
+                    "example": "2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6",
+                    "title": "Spotify IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I accidentally followed too many users on Spotify. Can you help me unfollow these users: 1vCWHaC5f2uS3yhpwWbIA6, 3TVXtAsR1Inumwj472S9r4, 5K4W6rqBFWDnAN6FQUkS6x, 0du5cEVh5yTK9QJze8zA0C, 6eUKZXaKkcviH0Ku9w2n3V, 6M2wZ9GZgrQXHCFfjv46we, 66CXWjxzNUsdJxJ2JdwvnR, 1uNFoZAHBGtllmzznpCI3s, 6vWDO969PvNqNYHIOW5v0m, 3nFkdlSjzX9mRTtwJOzDYB, 7dGJo4pcD2V6oG8kP0tJRR, 1Xyo4u8uXC1ZmMpatF05PJ, 5pKCCKE2ajJHZ9KAiaK11H, 3fMbdgg4jU18AjLCKBhRSm, 6qqNVTkY8uBg9cP3Jd7DAH, 4gzpq5DPGxSnKTe4SA8HAU, 6LuN9FCkKOj5PcnpouEgny, 6eUKZXaKkcviH0Ku9w2n3V, 6M2wZ9GZgrQXHCFfjv46we, 66CXWjxzNUsdJxJ2JdwvnR, 1uNFoZAHBGtllmzznpCI3s, 6vWDO969PvNqNYHIOW5v0m, 3nFkdlSjzX9mRTtwJOzDYB, 7dGJo4pcD2V6oG8kP0tJRR, 1Xyo4u8uXC1ZmMpatF05PJ, 5pKCCKE2ajJHZ9KAiaK11H, 3fMbdgg4jU18AjLCKBhRSm, 6qqNVTkY8uBg9cP3Jd7DAH, 4gzpq5DPGxSnKTe4SA8HAU, 6LuN9FCkKOj5PcnpouEgny, 6eUKZXaKkcviH0Ku9w2n3V, 6M2wZ9GZgrQXHCFfjv46we, 66CXWjxzNUsdJxJ2JdwvnR, 1uNFoZAHBGtllmzznpCI3s, 6vWDO969PvNqNYHIOW5v0m, 3nFkdlSjzX9mRTtwJOzDYB, 7dGJo4pcD2V6oG8kP0tJRR, 1Xyo4u8uXC1ZmMpatF05PJ, 5pKCCKE2ajJHZ9KAiaK11H, 3fMbdgg4jU18AjLCKBhRSm, 6qqNVTkY8uBg9cP3Jd7DAH, 4gzpq5DPGxSnKTe4SA8HAU, 6LuN9FCkKOj5PcnpouEgny, 6eUKZXaKkcviH0Ku9w2n3V, 6M2wZ9GZgrQXHCFfjv46we, 66CXWjxzNUsdJxJ2JdwvnR, 1uNFoZAHBGtllmzznpCI3s, 6vWDO969PvNqNYHIOW5v0m, 3nFkdlSjzX9mRTtwJOzDYB, 7dGJo4pcD2V6oG8kP0tJRR, 1Xyo4u8uXC1ZmMpatF05PJ?",
+            "url": "http://api.spotify.com/v1/me/following",
+            "Parameters": {
+                "type": "user",
+                "ids": "1vCWHaC5f2uS3yhpwWbIA6,3TVXtAsR1Inumwj472S9r4,5K4W6rqBFWDnAN6FQUkS6x,0du5cEVh5yTK9QJze8zA0C,6eUKZXaKkcviH0Ku9w2n3V,6M2wZ9GZgrQXHCFfjv46we,66CXWjxzNUsdJxJ2JdwvnR,1uNFoZAHBGtllmzznpCI3s,6vWDO969PvNqNYHIOW5v0m,3nFkdlSjzX9mRTtwJOzDYB,7dGJo4pcD2V6oG8kP0tJRR,1Xyo4u8uXC1ZmMpatF05PJ,5pKCCKE2ajJHZ9KAiaK11H,3fMbdgg4jU18AjLCKBhRSm,6qqNVTkY8uBg9cP3Jd7DAH,4gzpq5DPGxSnKTe4SA8HAU,6LuN9FCkKOj5PcnpouEgny,6eUKZXaKkcviH0Ku9w2n3V,6M2wZ9GZgrQXHCFfjv46we,66CXWjxzNUsdJxJ2JdwvnR,1uNFoZAHBGtllmzznpCI3s,6vWDO969PvNqNYHIOW5v0m,3nFkdlSjzX9mRTtwJOzDYB,7dGJo4pcD2V6oG8kP0tJRR,1Xyo4u8uXC1ZmMpatF05PJ,5pKCCKE2ajJHZ9KAiaK11H,3fMbdgg4jU18AjLCKBhRSm,6qqNVTkY8uBg9cP3Jd7DAH,4gzpq5DPGxSnKTe4SA8HAU,6LuN9FCkKOj5PcnpouEgny,6eUKZXaKkcviH0Ku9w2n3V,6M2wZ9GZgrQXHCFfjv46we,66CXWjxzNUsdJxJ2JdwvnR,1uNFoZAHBGtllmzznpCI3s,6vWDO969PvNqNYHIOW5v0m,3nFkdlSjzX9mRTtwJOzDYB,7dGJo4pcD2V6oG8kP0tJRR,1Xyo4u8uXC1ZmMpatF05PJ,5pKCCKE2ajJHZ9KAiaK11H,3fMbdgg4jU18AjLCKBhRSm,6qqNVTkY8uBg9cP3Jd7DAH,4gzpq5DPGxSnKTe4SA8HAU,6LuN9FCkKOj5PcnpouEgny,6eUKZXaKkcviH0Ku9w2n3V,6M2wZ9GZgrQXHCFfjv46we,66CXWjxzNUsdJxJ2JdwvnR,1uNFoZAHBGtllmzznpCI3s,6vWDO969PvNqNYHIOW5v0m,3nFkdlSjzX9mRTtwJOzDYB,7dGJo4pcD2V6oG8kP0tJRR,1Xyo4u8uXC1ZmMpatF05PJ"
+            }
+        }
+    },
+    "12": {
+        "ID": 12,
+        "tool_name": "GET_me_following",
+        "description": "This API retrieves a list of artists that the authenticated user is following on Spotify. It requires specific authentication scopes to access the list of followed artists. If these scopes are not granted, the API will return an error, such as 'Insufficient client scope'. If a user has not followed any artists, the response may indicate an empty list. The API supports pagination through the 'after' parameter, which specifies the last artist ID retrieved from the previous request, and the 'limit' parameter, which defines the maximum number of artists to return (between 1 and 50, default is 20). Only the 'artist' type is supported.",
+        "url": "http://api.spotify.com/v1/me/following",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "type",
+                "required": "true",
+                "schema": {
+                    "description": "The ID type: currently only `artist` is supported.\n",
+                    "enum": [
+                        "artist"
+                    ],
+                    "example": "artist",
+                    "title": "Item Type",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "after",
+                "required": "false",
+                "schema": {
+                    "description": "The last artist ID retrieved from the previous request.\n",
+                    "example": "0I2XqVXqHScXjHhk6AYYRe",
+                    "title": "After",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20\\. Minimum: 1\\. Maximum: 50\\.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "What happens if I try to see the artists I'm following on Spotify but I haven't followed any artists yet?",
+            "url": "http://api.spotify.com/v1/me/following",
+            "Parameters": {
+                "type": "artist"
+            }
+        }
+    },
+    "13": {
+        "ID": 13,
+        "tool_name": "PUT_me_following",
+        "description": "This API allows a Spotify user to follow up to 50 artists or other Spotify users at a time by providing their Spotify IDs. A Spotify Premium account is required to use this endpoint, as indicated by error responses such as 'PREMIUM_REQUIRED'. The 'type' parameter must be specified as either 'artist' or 'user' to indicate the type of IDs being followed. Requests with more than 50 IDs will result in an error. Additionally, if an invalid or non-existent Spotify ID is provided, the API may return an error indicating the failure of the command, which could be due to the requirement for a Premium account or other issues. Ensure that the IDs provided are valid and exist on Spotify.",
+        "url": "http://api.spotify.com/v1/me/following",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "type",
+                "required": "true",
+                "schema": {
+                    "description": "The ID type.\n",
+                    "enum": [
+                        "artist",
+                        "user"
+                    ],
+                    "example": "artist",
+                    "title": "Item Type",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids).\nA maximum of 50 IDs can be sent in one request.\n",
+                    "example": "2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6",
+                    "title": "Spotify IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I accidentally tried to follow a non-existent artist on Spotify. Can you see what happens if I try to follow an artist with the ID 12345abcde?",
+            "url": "http://api.spotify.com/v1/me/following",
+            "Parameters": {
+                "type": "artist",
+                "ids": "12345abcde"
+            }
+        }
+    },
+    "14": {
+        "ID": 14,
+        "tool_name": "GET_me_player",
+        "description": "This API retrieves the current playback state of an authenticated Spotify user, including details about the track or episode being played, playback progress, and the active device. A valid user access token is mandatory for the API to function correctly; without it, the API will return a 404 error with the message 'Invalid username'. The 'market' parameter specifies a country code for content availability, while the 'additional_types' parameter allows the inclusion of different item types such as 'track' and 'episode'.",
+        "url": "http://api.spotify.com/v1/me/player",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "additional_types",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>\n_**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>\nIn addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.\n",
+                    "title": "Additional Types",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you find out what I'm currently listening to on Spotify, and make sure it includes both tracks and episodes available in the Japanese market?",
+            "url": "http://api.spotify.com/v1/me/player",
+            "Parameters": {
+                "market": "JP",
+                "additional_types": "track,episode"
+            }
+        }
+    },
+    "15": {
+        "ID": 15,
+        "tool_name": "GET_me_player_currently-playing",
+        "description": "This API retrieves the currently playing track or podcast episode from the user's Spotify account. It requires user authentication and a valid access token. If the user is not authenticated or there is an issue with the username, a 404 error with the message 'Invalid username' will be returned. Optional parameters include 'market' to specify the country code for content availability and 'additional_types' to include other item types like 'episode' in addition to the default 'track'. Ensure that the user is logged in and the access token is valid to avoid errors.",
+        "url": "http://api.spotify.com/v1/me/player/currently-playing",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "additional_types",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>\n_**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>\nIn addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.\n",
+                    "title": "Additional Types",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you check what I'm currently listening to on Spotify and see if it's available in Germany? Also, include both tracks and episodes in the results.",
+            "url": "http://api.spotify.com/v1/me/player/currently-playing",
+            "Parameters": {
+                "market": "DE",
+                "additional_types": "track,episode"
+            }
+        }
+    },
+    "16": {
+        "ID": 16,
+        "tool_name": "GET_me_player_devices",
+        "description": "This API retrieves a list of devices available for playing music on the authenticated user's Spotify account. Proper user authentication is required, and the API may return specific error messages if authentication issues occur, such as 'Invalid username' with a 404 status code. The response includes details about each device, including its ID, name, type, and whether it is currently active. Users should ensure they are logged in and have granted the necessary permissions to access their device information. If authentication errors are encountered, users should check their login status or re-authenticate.",
+        "url": "http://api.spotify.com/v1/me/player/devices",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I recently changed my Spotify password and I'm having trouble accessing my devices. Can you check if there are any authentication issues preventing me from seeing my device list?",
+            "url": "http://api.spotify.com/v1/me/player/devices",
+            "Parameters": {}
+        }
+    },
+    "17": {
+        "ID": 17,
+        "tool_name": "POST_me_player_next",
+        "description": "This tool allows users to skip to the next track in their Spotify playback queue. It requires the user to have a Spotify Premium account, and the device must be actively playing music. If the user does not have a Premium account, the API will return an error with status 403 and message 'Player command failed: Premium required'. Additionally, the tool may not function if the playback queue is empty or if the device is not actively playing music. Ensure that the device is connected and playing music before using this tool.",
+        "url": "http://api.spotify.com/v1/me/player/next",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I'm listening to Spotify on my phone, but the queue seems to be empty. Can you try to skip to the next track?",
+            "url": "http://api.spotify.com/v1/me/player/next",
+            "Parameters": {}
+        }
+    },
+    "18": {
+        "ID": 18,
+        "tool_name": "PUT_me_player_pause",
+        "description": "Pause playback on the user's Spotify account. This action requires the user to have a Spotify Premium account; otherwise, it will return an error indicating that a Premium account is required. The tool does not check if playback is currently active before attempting to pause, and it will not provide a specific error if nothing is playing. Ensure the user is logged into a Premium account to avoid errors.",
+        "url": "http://api.spotify.com/v1/me/player/pause",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I have a Spotify Premium account, but I'm curious what happens if I try to pause the music when nothing is playing. Can you attempt to pause it and let me know if there's an error message?",
+            "url": "http://api.spotify.com/v1/me/player/pause",
+            "Parameters": {}
+        }
+    },
+    "19": {
+        "ID": 19,
+        "tool_name": "PUT_me_player_play",
+        "description": "This API starts or resumes playback on the user's active Spotify device. It requires the user to have a Spotify Premium account and an active internet connection. If the user does not have a Premium account, the API will return an error with a status code of 403 and a message indicating that Premium is required. The API cannot be used if the user is offline. The API does not specify the content to be played, such as a specific song or podcast episode, and assumes the user has already set up their playback context.",
+        "url": "http://api.spotify.com/v1/me/player/play",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "Can you start playing the latest episode of my favorite podcast on my Spotify device?",
+            "url": "http://api.spotify.com/v1/me/player/play",
+            "Parameters": {}
+        }
+    },
+    "20": {
+        "ID": 20,
+        "tool_name": "POST_me_player_previous",
+        "description": "This API allows you to skip to the previous track in the user's Spotify queue. It requires the user to have a Spotify Premium account. If the user does not have a Premium account, the API will return an error with status 403, indicating that a Premium account is required. The error message will specify 'Player command failed: Premium required' with the reason 'PREMIUM_REQUIRED'.",
+        "url": "http://api.spotify.com/v1/me/player/previous",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I'm using Spotify on my phone, and I accidentally skipped a song. Can you go back to the previous track for me?",
+            "url": "http://api.spotify.com/v1/me/player/previous",
+            "Parameters": {}
+        }
+    },
+    "21": {
+        "ID": 21,
+        "tool_name": "GET_me_player_queue",
+        "description": "This API retrieves the list of tracks or episodes in the user's Spotify queue. To access this API, the user must be authenticated with the appropriate permissions, specifically scopes that allow reading the user's playback state. If the user lacks these permissions or is not authenticated correctly, the API will return a 'Forbidden' error (status code 403). The API does not provide information on whether the queue is empty; it only indicates permission issues through errors. Ensure that the user has granted the necessary permissions to avoid such errors.",
+        "url": "http://api.spotify.com/v1/me/player/queue",
+        "required_parameters": [],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "What permissions do I need to check my Spotify queue, and what happens if I don't have them?",
+            "url": "http://api.spotify.com/v1/me/player/queue",
+            "Parameters": {}
+        }
+    },
+    "22": {
+        "ID": 22,
+        "tool_name": "POST_me_player_queue",
+        "description": "This API allows you to add a track or episode to the end of the user's current Spotify playback queue. To use it, provide the URI of the track or episode you want to add. You can also specify a device ID to target a specific device; otherwise, the user's currently active device will be used. The user must be logged into Spotify, have an active session, and have the right permissions to modify the playback queue. A 'Forbidden' error (status code 403) may occur if the user lacks permissions, if there are account or device restrictions, or if the device is not active. The API does not provide feedback on successful additions, only on errors. Ensure the URI is valid and corresponds to a track or episode.",
+        "url": "http://api.spotify.com/v1/me/player/queue",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "uri",
+                "required": "true",
+                "schema": {
+                    "description": "The uri of the item to add to the queue. Must be a track or an episode uri.\n",
+                    "example": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
+                    "title": "Spotify URI",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "device_id",
+                "required": "false",
+                "schema": {
+                    "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n",
+                    "example": "0d1841b0976bae2a3a310dd74c0f3df354899bc8",
+                    "title": "Device ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you add the track 'Blinding Lights' by The Weeknd to my Spotify queue?",
+            "url": "http://api.spotify.com/v1/me/player/queue",
+            "Parameters": {
+                "uri": "spotify:track:0VjIjW4GlUZAMYd2vXMi3b"
+            }
+        }
+    },
+    "23": {
+        "ID": 23,
+        "tool_name": "GET_me_player_recently-played",
+        "description": "Retrieve tracks from the current user's recently played music on Spotify, excluding podcast episodes. Authentication with the appropriate permissions is required to access recently played tracks. If permissions are insufficient, a '403 Insufficient client scope' error will be returned. Optional parameters include 'limit' to specify the number of tracks to return (default is 20, with a range of 1 to 50), 'after' to return tracks played after a specific Unix timestamp in milliseconds, and 'before' to return tracks played before a specific Unix timestamp in milliseconds. The 'after' and 'before' parameters cannot be used simultaneously. Ensure that the user has granted the necessary permissions to avoid errors.",
+        "url": "http://api.spotify.com/v1/me/player/recently-played",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "after",
+                "required": "false",
+                "schema": {
+                    "description": "A Unix timestamp in milliseconds. Returns all items\nafter (but not including) this cursor position. If `after` is specified, `before`\nmust not be specified.\n",
+                    "example": "1484811043508",
+                    "title": "After",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "before",
+                "required": "false",
+                "schema": {
+                    "description": "A Unix timestamp in milliseconds. Returns all items\nbefore (but not including) this cursor position. If `before` is specified,\n`after` must not be specified.\n",
+                    "title": "Before",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "What are the last 5 songs I listened to on Spotify before September 15, 2023?",
+            "url": "http://api.spotify.com/v1/me/player/recently-played",
+            "Parameters": {
+                "limit": 5,
+                "before": 1694736000000
+            }
+        }
+    },
+    "24": {
+        "ID": 24,
+        "tool_name": "PUT_me_player_repeat",
+        "description": "This API sets the repeat mode for a user's Spotify playback and requires a Spotify Premium account to function. The repeat mode options are: 'repeat-track' to continuously repeat the current song, 'repeat-context' to loop the current playlist or album, and 'off' to disable repeat. If a user without a Spotify Premium account attempts to use this API, it will result in a 403 error with the message 'Player command failed: Premium required' and the reason 'PREMIUM_REQUIRED'. Note that switching contexts, such as moving from a playlist to an album, will maintain the repeat mode setting if 'repeat-context' is selected.",
+        "url": "http://api.spotify.com/v1/me/player/repeat",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "state",
+                "required": "true",
+                "schema": {
+                    "description": "**track**, **context** or **off**.<br/>\n**track** will repeat the current track.<br/>\n**context** will repeat the current context.<br/>\n**off** will turn repeat off.\n",
+                    "example": "context",
+                    "title": "State",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "If I switch from a playlist to an album, can you make sure the repeat mode stays on for the album?",
+            "url": "http://api.spotify.com/v1/me/player/repeat",
+            "Parameters": {
+                "state": "context"
+            }
+        }
+    },
+    "25": {
+        "ID": 25,
+        "tool_name": "PUT_me_player_volume",
+        "description": "This API sets the volume for the user's current playback device on Spotify. The volume must be an integer between 0 and 100 inclusive. A Spotify Premium account is required to change the volume; otherwise, a 403 error with a 'Premium required' message will be returned. Ensure the volume percentage is within the specified range to avoid processing errors.",
+        "url": "http://api.spotify.com/v1/me/player/volume",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "volume_percent",
+                "required": "true",
+                "schema": {
+                    "description": "The volume to set. Must be a value from 0 to 100 inclusive.\n",
+                    "example": "50",
+                    "title": "Volume %",
+                    "type": "integer"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "Can you mute my Spotify playback completely?",
+            "url": "http://api.spotify.com/v1/me/player/volume",
+            "Parameters": {
+                "volume_percent": 0
+            }
+        }
+    },
+    "26": {
+        "ID": 26,
+        "tool_name": "GET_me_playlists",
+        "description": "This API retrieves a list of playlists owned or followed by the authenticated Spotify user. Authentication is mandatory; otherwise, a 401 error will be returned. Use the optional 'limit' and 'offset' parameters for pagination. 'Limit' specifies the number of playlists to return (1-50, default 20), and 'offset' specifies the starting index (default 0). For example, to retrieve the first playlist, set 'limit' to 1 and 'offset' to 0. If authentication fails, the API returns an error object with a status code and message.",
+        "url": "http://api.spotify.com/v1/me/playlists",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "'The index of the first playlist to return. Default:\n0 (the first object). Maximum offset: 100.000\\. Use with `limit` to get the\nnext set of playlists.'\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you show me the playlists I have on Spotify, but only return 1 playlist starting from the 0th one?",
+            "url": "http://api.spotify.com/v1/me/playlists",
+            "Parameters": {
+                "limit": 1,
+                "offset": 0
+            }
+        }
+    },
+    "27": {
+        "ID": 27,
+        "tool_name": "GET_me_top_type",
+        "description": "This API allows authenticated users to retrieve their top artists or tracks based on calculated affinity. Authentication is mandatory, and failure to provide valid credentials will result in an error message, such as a 401 status code indicating 'Valid user authentication required'. The 'type' parameter is required and specifies whether to return 'artists' or 'tracks'. Optional parameters include 'time_range', which defines the period over which affinities are calculated ('long_term' for several years, 'medium_term' for approximately the last 6 months, 'short_term' for about the last 4 weeks), and 'limit', which determines the number of results returned, with a maximum of 50. The API's response structure includes error handling, which is crucial for developers to manage when integrating this API.",
+        "url": "http://api.spotify.com/v1/me/top/{type}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "type",
+                "required": "true",
+                "schema": {
+                    "description": "The type of entity to return. Valid values: `artists` or `tracks`\n",
+                    "enum": [
+                        "artists",
+                        "tracks"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "time_range",
+                "required": "false",
+                "schema": {
+                    "default": "medium_term",
+                    "description": "Over what time frame the affinities are computed. Valid values: `long_term` (calculated from several years of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`\n",
+                    "example": "medium_term",
+                    "title": "Time Range",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you show me my top 20 tracks from the last 4 weeks?",
+            "url": "http://api.spotify.com/v1/me/top/tracks",
+            "Parameters": {
+                "type": "tracks",
+                "time_range": "short_term",
+                "limit": 20
+            }
+        }
+    },
+    "28": {
+        "ID": 28,
+        "tool_name": "DELETE_me_tracks",
+        "description": "This API allows authenticated users to remove one or more tracks from their 'Your Music' library on Spotify. Users must have the 'user-library-modify' scope authorized to modify their library. The API accepts up to 50 Spotify track IDs in a single request, formatted as a comma-separated list. A '403 Forbidden' error indicates insufficient permissions or authentication issues. Example usage: `ids=7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ`.",
+        "url": "http://api.spotify.com/v1/me/tracks",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids). For example: `ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M`. Maximum: 50 IDs.\n",
+                    "example": "7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B",
+                    "title": "Spotify Track IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I tried to remove some tracks from my Spotify library, but I got a '403 Forbidden' error. Can you tell me what permissions I need to fix this?",
+            "url": "http://api.spotify.com/v1/me/tracks",
+            "Parameters": {}
+        }
+    },
+    "29": {
+        "ID": 29,
+        "tool_name": "GET_me_tracks",
+        "description": "Retrieve a list of songs saved in the current Spotify user's 'Your Music' library. Access to this API requires a valid user access token with the appropriate permissions. Optional parameters include 'market' to filter songs by country availability using an ISO 3166-1 alpha-2 country code, 'limit' to specify the number of songs returned (default is 20, maximum is 50), and 'offset' to set the starting point for the list of songs returned. If no parameters are provided, the API will use default settings based on the user's account. A '403 Forbidden' error indicates missing permissions or an invalid token.",
+        "url": "http://api.spotify.com/v1/me/tracks",
+        "required_parameters": [],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Could you show me the songs in my Spotify library that are available in the Japanese market, starting from the 10th song, with a maximum of 5 songs?",
+            "url": "http://api.spotify.com/v1/me/tracks",
+            "Parameters": {
+                "market": "JP",
+                "limit": 5,
+                "offset": 10
+            }
+        }
+    },
+    "30": {
+        "ID": 30,
+        "tool_name": "PUT_me_tracks",
+        "description": "This API allows users to save one or more tracks to their 'Your Music' library on Spotify. To use this API, users must be authenticated and have the 'user-library-modify' scope. The API requires a comma-separated list of valid Spotify track IDs, with a maximum of 50 IDs per request. If the user lacks the necessary permissions, the API will return a '403 Forbidden' error. Additionally, if invalid track IDs are provided, the API may return an error. Ensure the user is authenticated and authorized before making a request. It is recommended to include examples of both successful and unsuccessful responses, including cases with invalid track IDs, to provide clarity on potential outcomes.",
+        "url": "http://api.spotify.com/v1/me/tracks",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "ids",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids). For example: `ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M`. Maximum: 50 IDs.\n",
+                    "example": "7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B",
+                    "title": "Spotify Track IDs",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I have some Spotify track IDs that might not exist: 12345, abcde, and 67890. Can you try saving them to my library and see what happens?",
+            "url": "http://api.spotify.com/v1/me/tracks",
+            "Parameters": {
+                "ids": "12345,abcde,67890"
+            }
+        }
+    },
+    "31": {
+        "ID": 31,
+        "tool_name": "GET_playlists_playlist_id",
+        "description": "This API retrieves detailed information about a specific Spotify playlist using its ID. It provides both general playlist details, such as the playlist's name, description, owner, public status, and number of followers, as well as specific track-level details, including track names, album names, and availability in specified markets. Users can filter the response using the 'fields' parameter to specify which details to retrieve, and the 'market' parameter to filter content based on regional availability. Note that if neither market nor user country is provided, some content may be unavailable. The 'additional_types' parameter is available for backward compatibility and might be deprecated in the future. The API response includes comprehensive track details, such as artist information, album details, and track availability across different regions.",
+        "url": "http://api.spotify.com/v1/playlists/{playlist_id}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "playlist_id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the playlist.\n",
+                    "example": "3cEYpjA9oz9GiPac4AsH4n",
+                    "title": "Playlist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "fields",
+                "required": "false",
+                "schema": {
+                    "description": "Filters for the query: a comma-separated list of the\nfields to return. If omitted, all fields are returned. For example, to get\njust the playlist''s description and URI: `fields=description,uri`. A dot\nseparator can be used to specify non-reoccurring fields, while parentheses\ncan be used to specify reoccurring fields within objects. For example, to\nget just the added date and user ID of the adder: `fields=tracks.items(added_at,added_by.id)`.\nUse multiple parentheses to drill down into nested objects, for example: `fields=tracks.items(track(name,href,album(name,href)))`.\nFields can be excluded by prefixing them with an exclamation mark, for example:\n`fields=tracks.items(track(name,href,album(!name,href)))`\n",
+                    "example": "items(added_by.id,track(name,href,album(name,href)))",
+                    "title": "Fields",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "additional_types",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>\n_**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>\nIn addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.\n",
+                    "title": "Additional Types",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you give me the details of the Spotify playlist with ID 3cEYpjA9oz9GiPac4AsH4n, but only include the track names and album names, and filter the results for availability in the Canadian market?",
+            "url": "http://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n",
+            "Parameters": {
+                "market": "CA",
+                "fields": "tracks.items(track(name,album(name)))"
+            }
+        }
+    },
+    "32": {
+        "ID": 32,
+        "tool_name": "PUT_playlists_playlist_id",
+        "description": "This API allows users to update the name and public/private status of a Spotify playlist they own. Users must provide valid authentication to perform these actions. The API requires the Spotify ID of the playlist as a path parameter. If the user does not own the playlist or if authentication fails, the API will return a 401 status code with a message indicating that valid user authentication is required. The API does not support changing the playlist's name and public/private status simultaneously without specifying both parameters. Ensure that the user has the necessary permissions to modify the playlist.",
+        "url": "http://api.spotify.com/v1/playlists/{playlist_id}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "playlist_id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the playlist.\n",
+                    "example": "3cEYpjA9oz9GiPac4AsH4n",
+                    "title": "Playlist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I tried to update my Spotify playlist with ID 3cEYpjA9oz9GiPac4AsH4n, but I don't own it. Can you check if it's possible to change its name to 'Party Mix'?",
+            "url": "http://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n",
+            "Parameters": {}
+        }
+    },
+    "33": {
+        "ID": 33,
+        "tool_name": "DELETE_playlists_playlist_id_tracks",
+        "description": "This API allows users to remove one or more tracks from a Spotify playlist by specifying the playlist ID in the URL path. Valid user authentication is required, which involves including authentication headers or tokens in the request. Users must provide track URIs and/or positions as parameters to specify which tracks to remove. If authentication is not provided, is invalid, or if required parameters are missing, the API will return an error message. Example usage: DELETE http://api.spotify.com/v1/playlists/{playlist_id}/tracks with parameters {\"tracks\": [{\"uri\": \"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\"}]}.",
+        "url": "http://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "playlist_id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the playlist.\n",
+                    "example": "3cEYpjA9oz9GiPac4AsH4n",
+                    "title": "Playlist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "I want to remove multiple tracks from my Spotify playlist, but I'm not sure how to specify their positions. The playlist ID is 3cEYpjA9oz9GiPac4AsH4n. Can you explain how to do this?",
+            "url": "http://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/tracks",
+            "Parameters": {}
+        }
+    },
+    "34": {
+        "ID": 34,
+        "tool_name": "GET_playlists_playlist_id_tracks",
+        "description": "The tool retrieves detailed information about tracks in a specified Spotify playlist. The response includes metadata such as track name, artist names, album details, and the date each track was added. It also provides information about who added each track. Optional parameters allow users to filter results by specifying fields to include, limiting the number of items returned, and setting the market for content availability. The API supports pagination with parameters like 'limit', 'offset', 'next', and 'previous' to manage large playlists efficiently. Additional fields such as preview URLs, explicit content flags, and market availability may also be included in the response. Note that filtering by specific user IDs who added tracks is not directly supported by the API and must be handled client-side after data retrieval.",
+        "url": "http://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "playlist_id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the playlist.\n",
+                    "example": "3cEYpjA9oz9GiPac4AsH4n",
+                    "title": "Playlist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "fields",
+                "required": "false",
+                "schema": {
+                    "description": "Filters for the query: a comma-separated list of the\nfields to return. If omitted, all fields are returned. For example, to get\njust the total number of items and the request limit:<br/>`fields=total,limit`<br/>A\ndot separator can be used to specify non-reoccurring fields, while parentheses\ncan be used to specify reoccurring fields within objects. For example, to\nget just the added date and user ID of the adder:<br/>`fields=items(added_at,added_by.id)`<br/>Use\nmultiple parentheses to drill down into nested objects, for example:<br/>`fields=items(track(name,href,album(name,href)))`<br/>Fields\ncan be excluded by prefixing them with an exclamation mark, for example:<br/>`fields=items.track.album(!external_urls,images)`\n",
+                    "example": "items(added_by.id,track(name,href,album(name,href)))",
+                    "title": "Fields",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.\n",
+                    "example": "5",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "additional_types",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>\n_**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>\nIn addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.\n",
+                    "title": "Additional Types",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Could you show me the details of tracks from the Spotify playlist with ID 3cEYpjA9oz9GiPac4AsH4n, but only include tracks added by a specific user with ID 'user123' and show the track name, artist names, and the date they were added?",
+            "url": "http://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/tracks",
+            "Parameters": {
+                "fields": "items(added_by.id,track(name,artists(name)),added_at)",
+                "limit": 50
+            }
+        }
+    },
+    "35": {
+        "ID": 35,
+        "tool_name": "POST_playlists_playlist_id_tracks",
+        "description": "This API endpoint allows you to add tracks or episodes to a specific Spotify playlist. You must provide the Spotify ID of the playlist and a list of Spotify URIs for the tracks or episodes you want to add, separated by commas. The maximum number of items you can add in one request is strictly 100. If you are adding a large number of items, it is recommended to pass them in the request body to avoid exceeding the maximum length of the request URI. By default, items are appended to the playlist, but you can specify a position to insert them using a zero-based index. The response includes a link to the playlist with the added items and may include metadata such as the time of addition, the user who added the item, and the item's availability in different markets. Errors such as exceeding the maximum number of items or providing invalid URIs will be communicated in the response.",
+        "url": "http://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "playlist_id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids) of the playlist.\n",
+                    "example": "3cEYpjA9oz9GiPac4AsH4n",
+                    "title": "Playlist ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "position",
+                "required": "false",
+                "schema": {
+                    "description": "The position to insert the items, a zero-based index. For example, to insert the items in the first position: `position=0`; to insert the items in the third position: `position=2`. If omitted, the items will be appended to the playlist. Items are added in the order they are listed in the query string or request body.\n",
+                    "example": "0",
+                    "title": "Position (append by default)",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "uris",
+                "required": "false",
+                "schema": {
+                    "description": "A comma-separated list of [Spotify URIs](/documentation/web-api/#spotify-uris-and-ids) to add, can be track or episode URIs. For example:<br/>`uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh, spotify:track:1301WleyT98MSxVHPZCA6M, spotify:episode:512ojhOuo1ktJprKbVcKyQ`<br/>A maximum of 100 items can be added in one request. <br/>\n_**Note**: it is likely that passing a large number of item URIs as a query parameter will exceed the maximum length of the request URI. When adding a large number of items, it is recommended to pass them in the request body, see below._\n",
+                    "example": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M",
+                    "title": "Spotify Track URIs",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "I have a playlist with ID '3cEYpjA9oz9GiPac4AsH4n'. Can you try adding 101 tracks to see if it handles the limit? Here are some URIs: 'spotify:track:1', 'spotify:track:2', ..., 'spotify:track:101'.",
+            "url": "http://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/tracks",
+            "Parameters": {
+                "uris": "spotify:track:1,spotify:track:2,spotify:track:3,spotify:track:4,spotify:track:5,spotify:track:6,spotify:track:7,spotify:track:8,spotify:track:9,spotify:track:10,spotify:track:11,spotify:track:12,spotify:track:13,spotify:track:14,spotify:track:15,spotify:track:16,spotify:track:17,spotify:track:18,spotify:track:19,spotify:track:20,spotify:track:21,spotify:track:22,spotify:track:23,spotify:track:24,spotify:track:25,spotify:track:26,spotify:track:27,spotify:track:28,spotify:track:29,spotify:track:30,spotify:track:31,spotify:track:32,spotify:track:33,spotify:track:34,spotify:track:35,spotify:track:36,spotify:track:37,spotify:track:38,spotify:track:39,spotify:track:40,spotify:track:41,spotify:track:42,spotify:track:43,spotify:track:44,spotify:track:45,spotify:track:46,spotify:track:47,spotify:track:48,spotify:track:49,spotify:track:50,spotify:track:51,spotify:track:52,spotify:track:53,spotify:track:54,spotify:track:55,spotify:track:56,spotify:track:57,spotify:track:58,spotify:track:59,spotify:track:60,spotify:track:61,spotify:track:62,spotify:track:63,spotify:track:64,spotify:track:65,spotify:track:66,spotify:track:67,spotify:track:68,spotify:track:69,spotify:track:70,spotify:track:71,spotify:track:72,spotify:track:73,spotify:track:74,spotify:track:75,spotify:track:76,spotify:track:77,spotify:track:78,spotify:track:79,spotify:track:80,spotify:track:81,spotify:track:82,spotify:track:83,spotify:track:84,spotify:track:85,spotify:track:86,spotify:track:87,spotify:track:88,spotify:track:89,spotify:track:90,spotify:track:91,spotify:track:92,spotify:track:93,spotify:track:94,spotify:track:95,spotify:track:96,spotify:track:97,spotify:track:98,spotify:track:99,spotify:track:100,spotify:track:101"
+            }
+        }
+    },
+    "36": {
+        "ID": 36,
+        "tool_name": "GET_recommendations",
+        "description": "This API generates music track recommendations using seed inputs, which can be a combination of up to 5 seed artists, seed tracks, and seed genres. The response provides a list of recommended tracks with detailed information such as album details, artist information, track name, duration, explicit content flag, popularity, and availability in specific markets. The optional 'market' parameter allows filtering of content based on availability in a specified country. If the requested number of tracks cannot be generated due to small pools or restrictive filtering, the response includes debugging information. Preview URLs are provided for tracks where available, although some tracks may not be available in all markets. The API also provides information on the initial pool size, the size after filtering, and the size after relinking for each seed used. The 'seed_genres' parameter accepts a comma-separated list of genres, while 'seed_tracks' and 'seed_artists' parameters accept comma-separated lists of Spotify IDs. The 'limit' parameter specifies the number of recommended tracks, with a default of 20 and a range from 1 to 100.",
+        "url": "http://api.spotify.com/v1/recommendations",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "seed_artists",
+                "required": "true",
+                "schema": {
+                    "description": "A comma separated list of [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids) for seed artists.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n",
+                    "example": "4NHQUGzhtTLFvgF5SZesLK",
+                    "title": "Spotify Artist ID Seeds",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "seed_genres",
+                "required": "true",
+                "schema": {
+                    "description": "A comma separated list of any genres in the set of [available genre seeds](#available-genre-seeds).  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n",
+                    "example": "classical,country",
+                    "title": "Genres Seeds",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "seed_tracks",
+                "required": "true",
+                "schema": {
+                    "description": "A comma separated list of [Spotify IDs](/documentation/web-api/#spotify-uris-and-ids) for a seed track.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n",
+                    "example": "0c6xIDDpzE81m2q797ordA",
+                    "title": "Spotify Track ID Seeds",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20\\. Minimum: 1\\. Maximum: 100.\n",
+                    "example": "10",
+                    "maximum": "100",
+                    "minimum": "1",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you recommend some tracks based on the genre 'jazz' and the track with Spotify ID 3n3Ppam7vgaVa1iaRUc9Lp? Please ensure these tracks are available in the Japanese market and limit the recommendations to 5 tracks.",
+            "url": "http://api.spotify.com/v1/recommendations",
+            "Parameters": {
+                "seed_genres": "jazz",
+                "seed_tracks": "3n3Ppam7vgaVa1iaRUc9Lp",
+                "market": "JP",
+                "limit": 5
+            }
+        }
+    },
+    "37": {
+        "ID": 37,
+        "tool_name": "GET_search",
+        "description": "This API allows you to search the Spotify catalog for music and audio content using keywords. You can search for albums, artists, playlists, tracks, shows, episodes, or audiobooks. The API provides detailed information such as album details, artist information, track duration, and popularity. You can use filters for artist, album, track, and genre, and limit and paginate results using 'limit' and 'offset'. The 'market' parameter restricts results to specific countries, and 'include_external=audio' includes externally hosted audio content. The 'tag:new' filter finds albums released in the past two weeks. Note that audiobooks are only available in the US, UK, Ireland, New Zealand, and Australia.",
+        "url": "http://api.spotify.com/v1/search",
+        "required_parameters": [
+            {
+                "in": "query",
+                "name": "q",
+                "required": "true",
+                "schema": {
+                    "description": "Your search query.\n\nYou can narrow down your search using field filters. The available filters are `album`, `artist`, `track`, `year`, `upc`, `tag:hipster`, `tag:new`, `isrc`, and `genre`. Each field filter only applies to certain result types.\n\nThe `artist` and `year` filters can be used while searching albums, artists and tracks. You can filter on a single `year` or a range (e.g. 1955-1960).<br />\nThe `album` filter can be used while searching albums and tracks.<br />\nThe `genre` filter can be used while searching artists and tracks.<br />\nThe `isrc` and `track` filters can be used while searching tracks.<br />\nThe `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />\n",
+                    "example": "remaster%20track:Doxy%20artist:Miles%20Davis",
+                    "title": "Query",
+                    "type": "string"
+                }
+            },
+            {
+                "explode": "false",
+                "in": "query",
+                "name": "type",
+                "required": "true",
+                "schema": {
+                    "description": "A comma-separated list of item types to search across. Search results include hits\nfrom all the specified item types. For example: `q=abacab&type=album,track` returns\nboth albums and tracks matching \"abacab\".\n",
+                    "items": {
+                        "enum": [
+                            "album",
+                            "artist",
+                            "playlist",
+                            "track",
+                            "show",
+                            "episode",
+                            "audiobook"
+                        ],
+                        "type": "string"
+                    },
+                    "title": "Item type",
+                    "type": "array"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            },
+            {
+                "in": "query",
+                "name": "limit",
+                "required": "false",
+                "schema": {
+                    "default": "20",
+                    "description": "The maximum number of results to return in each item type.\n",
+                    "example": "10",
+                    "maximum": "50",
+                    "minimum": "0",
+                    "title": "Limit",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "offset",
+                "required": "false",
+                "schema": {
+                    "default": "0",
+                    "description": "The index of the first result to return. Use\nwith limit to get the next page of search results.\n",
+                    "example": "5",
+                    "maximum": "1000",
+                    "minimum": "0",
+                    "title": "Offset",
+                    "type": "integer"
+                }
+            },
+            {
+                "in": "query",
+                "name": "include_external",
+                "required": "false",
+                "schema": {
+                    "description": "If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks\nthe content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.\n",
+                    "enum": [
+                        "audio"
+                    ],
+                    "title": "Include External",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Can you find some rock tracks from the 1980s that are available in the UK and include external audio content?",
+            "url": "http://api.spotify.com/v1/search",
+            "Parameters": {
+                "q": "genre:rock year:1980-1989",
+                "type": "track",
+                "market": "GB",
+                "include_external": "audio"
+            }
+        }
+    },
+    "38": {
+        "ID": 38,
+        "tool_name": "GET_tracks_id",
+        "description": "This API retrieves detailed information about a specific track from the Spotify catalog using its unique Spotify ID. The response includes the track's album details (such as album type, release date, and total tracks), artist information, track duration in milliseconds, and an explicit content flag (true or false). It also provides external URLs for the track, album, and artist. The track's availability in various markets is indicated, with an empty list meaning it may not be available in any market. External identifiers like the ISRC (International Standard Recording Code) are included, along with a preview URL for a short audio sample if available (or null if not). The track's popularity score on Spotify is also provided, where a score of 0 indicates no popularity. The 'market' parameter can be used to specify a country code to filter content availability.",
+        "url": "http://api.spotify.com/v1/tracks/{id}",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": "true",
+                "schema": {
+                    "description": "The [Spotify ID](/documentation/web-api/#spotify-uris-and-ids)\nfor the track.\n",
+                    "example": "11dFghVXANMlKmJXsNCbNl",
+                    "title": "Spotify Track ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [
+            {
+                "in": "query",
+                "name": "market",
+                "required": "false",
+                "schema": {
+                    "description": "An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).\n  If a country code is specified, only content that is available in that market will be returned.<br/>\n  If a valid user access token is specified in the request header, the country associated with\n  the user account will take priority over this parameter.<br/>\n  _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>\n  Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/).\n",
+                    "example": "ES",
+                    "title": "Market",
+                    "type": "string"
+                }
+            }
+        ],
+        "example": {
+            "User Query": "Could you provide information about the track with Spotify ID 11dFghVXANMlKmJXsNCbNl, including its ISRC code and how popular it is?",
+            "url": "http://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl",
+            "Parameters": {}
+        }
+    },
+    "39": {
+        "ID": 39,
+        "tool_name": "POST_users_user_id_playlists",
+        "description": "Retrieve a list of existing playlists for a specified Spotify user ID. This API endpoint fetches playlists associated with a user, including public playlists and those owned by the user. The response includes details such as playlist names, descriptions, external URLs, images, track counts, and owner information. It also indicates whether a playlist is public or collaborative through the 'public' and 'collaborative' fields. Pagination details like 'limit', 'offset', and 'total' are provided. Note that private playlists are not included in the response. This endpoint does not create new playlists; a different endpoint should be used for playlist creation.",
+        "url": "http://api.spotify.com/v1/users/{user_id}/playlists",
+        "required_parameters": [
+            {
+                "in": "path",
+                "name": "user_id",
+                "required": "true",
+                "schema": {
+                    "description": "The user's [Spotify user ID](/documentation/web-api/#spotify-uris-and-ids).\n",
+                    "example": "smedjan",
+                    "title": "User ID",
+                    "type": "string"
+                }
+            }
+        ],
+        "optional_parameters": [],
+        "example": {
+            "User Query": "Can you find out if the Spotify user with the ID 'smedjan' has any playlists that are private or have unique privacy settings?",
+            "url": "http://api.spotify.com/v1/users/smedjan/playlists",
+            "Parameters": {}
+        }
+    }
+}
